@@ -14,6 +14,30 @@ Bien entendu, vous devez avoir installé Docker-engine et une version récente d
 Kibana sera alors accéssible depuis l'url [http://localhost:5601](http://localhost:5601)
 
 
-## Slides en version 16/9 ou 4/3
+### Slides en version 16/9 ou 4/3
 
 Dans le docker compose, il suffit de remplacer le tag docker de l'image jmonsinjon/bdxio-kibana par 4.3 ou 16.9
+
+#### 16/9
+```yml
+kibana-16.9:
+  image: jmonsinjon/bdxio-kibana:16.9
+  links:
+    - "elasticsearch:elasticsearch"
+  ports:
+    - "5601:5601"
+  environment:
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+```
+
+#### 4/3
+```yml
+kibana-4.3:
+  image: jmonsinjon/bdxio-kibana:4.3
+  links:
+    - "elasticsearch:elasticsearch"
+  ports:
+    - "5601:5601"
+  environment:
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+```
