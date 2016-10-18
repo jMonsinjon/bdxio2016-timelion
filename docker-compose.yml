@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  elasticsearch:
+    image: jmonsinjon/bdxio-elasticsearch:5-alpha5
+    ports:
+      - "9200"
+      - "9300"
+    command: ["-Enetwork.host=0.0.0.0", "-Ebootstrap.ignore_system_bootstrap_checks=true"]
+    environment:
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g"
+  kibana-16.9:
+    image: jmonsinjon/bdxio-kibana:16.9
+    links:
+      - "elasticsearch:elasticsearch"
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
